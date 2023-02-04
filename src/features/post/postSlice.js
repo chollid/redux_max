@@ -3,13 +3,14 @@ import { sub } from "date-fns";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
-const initialState = [
-  {
-    posts: [],
-    status: "idle", // idle, loading, succeeded, failed
-    error: null,
-  },
-];
+const initialState = {
+  // title: "",
+  // content: "",
+  // author: "",
+  posts: [],
+  status: "idle", // idle, loading, succeeded, failed
+  error: null,
+};
 
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
@@ -72,19 +73,20 @@ const postsSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "succeeded";
         let min = 1;
-        const loadedPosts = action.payload.map((post) => {
-          post.date = sub(new Date(), { minutes: min++ }).toISOString();
-          post.reactions = {
-            thumbsUp: 0,
-            wow: 0,
-            heart: 0,
-            rocket: 0,
-            coffee: 0,
-          };
-          return post;
-        });
+        // const loadedPosts = action.payload.map((post) => {
+        //     console.log("djfalsdjl;fjdkals", post);
+        //     post.date = sub(new Date(), { minutes: min++ }).toISOString();
+        //     post.reactions = {
+        //       thumbsUp: 0,
+        //       wow: 0,
+        //       heart: 0,
+        //       rocket: 0,
+        //       coffee: 0,
+        //     };
+        //   return post;
+        // });
         // Add any fetched posts to the array
-        state.posts = state.posts.concat(loadedPosts);
+        state = state.posts;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "failed";

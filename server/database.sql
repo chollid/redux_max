@@ -6,4 +6,3 @@ CREATE TABLE posts (
   content VARCHAR(556),
   author VARCHAR(255)
 );
-
